@@ -1,0 +1,22 @@
+security:
+    providers:
+        in_memory:
+            memory:
+                users:
+                    admin: { password: 'password', roles: ['ROLE_ADMIN'] }
+                    user: { password: 'password', roles: ['ROLE_USER'] }
+
+    firewalls:
+        secured_area:
+            pattern: ^/admin
+            security: true
+            roles: ROLE_ADMIN
+
+        secured_user_area:
+            pattern: ^/user
+            security: true
+            roles: ROLE_USER
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_USER }
